@@ -1,0 +1,107 @@
+ :root{
+  --bg: rgba(0, 36, 143, 0);          /* transparent at top */
+  --bg-scrolled: rgba(15, 17, 23, 0.85);/* solid after scroll */
+  --link: #e6e6e6;
+  --link-hover: #8fd3ff;
+  --brand: #ffffff;
+  --accent: #69b8ff;
+  --shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #eaecef;
+  background:
+    radial-gradient(1200px 600px at 10% -20%, rgba(105,184,255,0.25), transparent 60%),
+    radial-gradient(900px 500px at 90% -10%, rgba(255,123,172,0.18), transparent 60%),
+    #667794;
+  min-height: 200vh; /* so we can scroll */
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  backdrop-filter: saturate(140%) blur(6px);
+  background: var(--bg);
+  transition: background 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+  border-bottom: 1px solid transparent;
+  z-index: 1000;
+}
+
+.navbar.scrolled{
+  background: var(--bg-scrolled);
+  box-shadow: var(--shadow);
+  border-bottom-color: rgba(238, 148, 148, 0.08);
+}
+
+.brand{
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  font-size: 1.05rem;
+}
+
+.nav-links{
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: clamp(0.6rem, 2vw, 1.25rem);
+}
+
+.nav-link{
+  text-decoration: none;
+  color: var(--link);
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  transition: color 160ms ease, background 160ms ease, transform 120ms ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible{
+  color: var(--link-hover);
+  background: rgba(240, 132, 132, 0.06);
+  outline: none;
+}
+.nav-link:active{
+  transform: translateY(1px);
+}
+
+/* Optional “active section” look if you pre-mark a link with .active */
+.nav-link.active{
+  color: white;
+  background: rgba(105,184,255,0.15);
+}
+
+/* ===== PAGE CONTENT ===== */
+.hero{
+  padding-top: 80px; /* make room for fixed nav */
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.hero h1{ margin: 0 0 0.25rem; font-size: clamp(2rem, 4vw, 3rem); }
+.hero p{ margin: 0; color: #bacde0; }
+
+.block{
+  padding: 64px 24px 120px;
+  border-top: 1px solid rgba(197, 131, 131, 0.06);
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .navbar{ transition: none; }
+  .nav-link{ transition: none; }
+}
